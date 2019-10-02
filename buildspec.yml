@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+  build:
+    commands:
+      - docker build -t youtube:latest .
+      - docker tag youtube:latest 885121665536.dkr.ecr.us-east-1.amazonaws.com/youtube:latest
+  post_build:
+    commands:
+      - docker push 885121665536.dkr.ecr.us-east-1.amazonaws.com/youtube:latest
+      - printf '[{"name":"helloWorld","imageUri":"%s"}]' 885121665536.dkr.ecr.us-east-1.amazonaws.com/youtube:latest > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
