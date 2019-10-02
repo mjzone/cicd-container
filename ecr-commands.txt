@@ -5,7 +5,7 @@ $(aws ecr get-login --no-include-email --region us-east-1)
 docker build -t youtube:latest .
 
 // tag the docker image
-docker tag <IMAGE_NAME> <ECR_URL>/youtube:latest
+docker tag <IMAGE_NAME> <ECR_URL>
 
 // push to ECR
-docker push <ECR_URL>/youtube:latest
+docker push <ECR_URL>
