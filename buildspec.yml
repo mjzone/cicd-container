@@ -3,14 +3,14 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - $(aws ecr get-login --no-include-email --region us-east-1)
+      - $(aws ecr get-login --no-include-email --region us-east-2)
   build:
     commands:
-      - docker build -t youtube:latest .
-      - docker tag <IMAGE_NAME> <ECR_URL>
+      - docker build -t demo1:latest .
+      - docker tag demo1:latest 554309730032.dkr.ecr.us-east-2.amazonaws.com/demo1:latest
   post_build:
     commands:
-      - docker push <ECR_URL>
-      - printf '[{"name":<TASK_DEFINITION_NAME>,"imageUri":"%s"}]' <ECR_URL> > imagedefinitions.json
+      - docker push 554309730032.dkr.ecr.us-east-2.amazonaws.com/demo1:latest
+      - printf '[{"name":helloWorld,"imageUri":"%s"}]' 554309730032.dkr.ecr.us-east-2.amazonaws.com/demo1:latest > imagedefinitions.json
 artifacts:
   files: imagedefinitions.json
